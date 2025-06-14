@@ -1,4 +1,3 @@
-
 # webhook_server.py
 from flask import Flask, request, jsonify
 import threading
@@ -55,4 +54,3 @@ def webhook():
 if __name__ == '__main__':
     print("🚀 Webhook server τρέχει στο http://localhost:5000/webhook")
     app.run(host='0.0.0.0', port=5000)
-
