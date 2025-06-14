@@ -1,4 +1,4 @@
-# webhook_server.py (debug enabled)
+# webhook_server.py (debug enabled outside thread)
 from flask import Flask, request, jsonify
 import threading
 import math
@@ -13,9 +13,6 @@ def calculate_position_size(risk, capital=1000, max_risk_pct=0.10, leverage=5):
     return round(risk_per_trade / risk, 2)
 
 def process_signal(data):
-    print("✅ RECEIVED DATA:")
-    print(data)
-
     symbol = data.get("symbol")
     side = data.get("side")
     entry = float(data.get("entry"))
@@ -47,7 +44,11 @@ def webhook():
         return jsonify({"status": "no data received"}), 400
     try:
         print("\n📩 Webhook signal received")
+        print("✅ RECEIVED DATA:")
+        print(data)  # DEBUG: εμφανίζεται σίγουρα στα logs Render
+
         threading.Thread(target=process_signal, args=(data,)).start()
+
         return jsonify({"status": "ok"}), 200
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)}), 500
