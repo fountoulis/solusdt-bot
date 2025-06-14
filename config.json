@@ -1,6 +1,6 @@
 {
-  "api_key": "YOUR_API_KEY",
-  "api_secret": "YOUR_API_SECRET",
+  "api_key": "__ENV__BYBIT_API_KEY",
+  "api_secret": "__ENV__BYBIT_API_SECRET",
   "base_url": "https://api-testnet.bybit.com",
   "leverage": 5,
   "risk_percent": 10,
