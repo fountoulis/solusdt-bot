@@ -1,6 +1,5 @@
-# webhook_server.py (debug ready)
+# webhook_server.py
 from flask import Flask, request, jsonify
-import threading
 import math
 
 app = Flask(__name__)
@@ -46,8 +45,9 @@ def webhook():
     if not data:
         return jsonify({"status": "no data received"}), 400
     try:
-        print("\n📩 Webhook signal received")
-        threading.Thread(target=process_signal, args=(data,)).start()
+        print("✅ RECEIVED DATA:")
+        print(data)
+        process_signal(data)
         return jsonify({"status": "ok"}), 200
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)}), 500
